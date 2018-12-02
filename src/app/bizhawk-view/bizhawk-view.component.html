@@ -1,0 +1,10 @@
+  <br>
+  <br>
+  <br>
+<form class="form-inline">
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="input1" class="sr-only">Time</label>
+    <input type="text" class="form-control" id="input1" placeholder="Time" [(ngModel)] = "curTime" name="curTime">
+  </div>
+  <button type="submit" class="btn btn-primary mb-2" (click)="getCurTime()" >Get Current Time</button>
+</form>
