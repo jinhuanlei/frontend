@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-
+import {HttpClient} from '@angular/common/http';
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-bizhawk-view',
   templateUrl: './bizhawk-view.component.html',
@@ -8,17 +8,18 @@ import {HttpClient} from "@angular/common/http";
 })
 export class BizhawkViewComponent implements OnInit {
 
-  constructor(private http : HttpClient) {}
-  curTime : any = 0;
+  constructor(private http: HttpClient) {}
+  baseUrl: string = environment.apiUrl;
+  curTime: any = 0;
   ngOnInit() {
   }
 
   getCurTime(): void {
-    this.http.get("/visualnn/api/v1/time").subscribe(
+    this.http.get(this.baseUrl + 'visual/time/').subscribe(
       data => {
         this.curTime = data;
       }
-    )
+    );
   }
 
 }
