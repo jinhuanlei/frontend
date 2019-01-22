@@ -6,14 +6,16 @@
     <label for="input1" class="sr-only">Time</label>
     <input type="text" class="form-control" id="input1" placeholder="Time" [(ngModel)] = "curTime" name="curTime">
   </div>
-  <button type="button" class="btn btn-outline-primary" (click)="getCurTime()" >Get Current Time</button>
+  <button type="button" class="btn btn-outline-primary" (click)="testFunc()" >Test Func</button>
 </form>
 <hr>
   <div>
-   <div style="text-align: center;"><button type="button" class="btn btn-outline-primary" (click)="connect()">Connect</button></div>
+   <div style="text-align: center;"><button type="button" class="btn btn-outline-primary" (click)="connect()" [disabled]="activated" [ngStyle]="{cursor: cursorStatus}">Connect</button></div>
   </div>
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="Bizhawk View" [(ngModel)]="visualImage" name="visualImage" readonly></textarea>
-  </mat-form-field>
-</form>
+  <br>
+<div class="input-group col-md-6 offset-md-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">With textarea</span>
+  </div>
+  <textarea class="form-control" aria-label="Bizhawk View" [(ngModel)]="visualImage" name="visualImage" readonly></textarea>
+</div>

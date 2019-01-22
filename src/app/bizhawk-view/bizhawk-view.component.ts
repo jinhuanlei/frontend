@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {WebSocketSubject} from 'rxjs/websocket';
-import { Observable } from 'rxjs';
+import {Subscription} from 'rxjs';
 import {SocketService} from '../socket.service';
-import {Subscription} from "rxjs";
 
 
 @Component({
@@ -21,31 +19,47 @@ export class BizhawkViewComponent implements OnInit {
   curTime: any = 0;
   visualImage: any = 'Ready to connecting...';
   ioConnection: any;
-  messages: Message[] = [];
   messageContent: string;
   wsSubscription: Subscription;
-  status;
+  status: any;
+  activated = false;
+  cursorStatus = 'pointer';
+
   constructor(private http: HttpClient, private wsService: SocketService) {
-     this.wsSubscription = this.wsService.createObservableSocket('ws://localhost:8000/visual/ws/')
+    this.wsSubscription = this.wsService.createObservableSocket('ws://localhost:8000/visual/ws/')
       .subscribe(
-        data => this.visualImage = data,
-        err => console.log( 'err'),
-        () =>  console.log( 'The observable stream is complete')
+        data => {
+          const obj: MyObj = JSON.parse(data.toString());
+          if (obj.data == null) {
+            this.visualImage += '\r' + obj.message;
+          } else {
+            this.visualImage = obj.data;
+          }
+        },
+        err => console.log('err'),
+        () => {
+          console.log('The observable stream is complete');
+          this.activated = false;
+          this.cursorStatus = 'pointer';
+        }
       );
   }
 
 
-  getCurTime(): void {
-    this.http.get(this.baseUrl + 'visual/time/').subscribe(
-      data => {
-        this.curTime = data;
-      }
+  testFunc(): void {
+    this.http.get(this.baseUrl + 'visual/testFunc/').subscribe(
+      // data => {
+      //   this.curTime = data;
+      // }
     );
   }
 
   connect() {
     const message = 'OK';
-     this.status = this.wsService.sendMessage(message);
+    this.status = this.wsService.sendMessage(message);
+    this.activated = true;
+    this.cursorStatus = 'not-allowed';
+    console.log(status);
   }
 
 
@@ -61,6 +75,9 @@ export class Message {
   }
 }
 
-
+interface MyObj {
+  message: string;
+  data: string;
+}
 
 
