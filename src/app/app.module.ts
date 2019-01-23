@@ -13,6 +13,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { TestComponent } from './test/test.component';
 import {SocketService} from './socket.service';
 import { ModelListComponent } from './model-list/model-list.component';
+import { CreateModelComponent } from './create-model/create-model.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { ModelListComponent } from './model-list/model-list.component';
     IndexComponent,
     TestComponent,
     ModelListComponent,
+    CreateModelComponent,
   ],
   imports: [
     BrowserModule,
