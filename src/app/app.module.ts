@@ -7,17 +7,19 @@ import {IndexComponent} from './index/index.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatTableModule} from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { TestComponent } from './test/test.component';
 import {SocketService} from './socket.service';
+import { ModelListComponent } from './model-list/model-list.component';
 @NgModule({
   declarations: [
     AppComponent,
     BizhawkViewComponent,
     IndexComponent,
     TestComponent,
+    ModelListComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +31,7 @@ import {SocketService} from './socket.service';
     MatCheckboxModule,
     MatIconModule,
     MatInputModule,
+    MatTableModule
   ],
   providers: [HttpClientModule, SocketService],
   bootstrap: [AppComponent]
