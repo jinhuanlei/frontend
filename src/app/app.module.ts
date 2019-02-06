@@ -10,7 +10,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatTableModule, MatSelectModule } from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import { TestComponent } from './test/test.component';
 import {SocketService} from './socket.service';
 import { ModelListComponent } from './model-list/model-list.component';
 import { CreateModelComponent } from './create-model/create-model.component';
@@ -20,7 +19,6 @@ import { QuickStartComponent } from './quick-start/quick-start.component';
     AppComponent,
     BizhawkViewComponent,
     IndexComponent,
-    TestComponent,
     ModelListComponent,
     CreateModelComponent,
     QuickStartComponent,
