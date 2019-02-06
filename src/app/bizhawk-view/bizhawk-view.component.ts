@@ -54,6 +54,14 @@ export class BizhawkViewComponent implements OnInit {
     );
   }
 
+  testDB(): void {
+    this.http.get(this.baseUrl + 'visual/testDB/').subscribe(
+      // data => {
+      //   this.curTime = data;
+      // }
+    );
+  }
+
   connect() {
     const message = 'OK';
     this.status = this.wsService.sendMessage(message);
