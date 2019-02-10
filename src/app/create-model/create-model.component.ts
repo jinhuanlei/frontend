@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-create-model',
@@ -11,10 +12,11 @@ export class CreateModelComponent implements OnInit {
   constructor(private http: HttpClient) {
   }
 
+  baseUrl: string = environment.apiUrl;
   layer_nums: any;
   fieldArray: Array<any> = [];
   newAttribute: any = {};
-
+  modelName: any;
   firstField = true;
   firstFieldName = 'First Item name';
   isEditItems: boolean;
@@ -53,6 +55,15 @@ export class CreateModelComponent implements OnInit {
       }
 
     }
+  }
+
+  submitForm() {
+    const formJson = {'model_name': this.modelName, 'layers': this.fieldArray};
+    this.http.post(this.baseUrl + 'visual/createModel/', formJson).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
   }
 
 }
