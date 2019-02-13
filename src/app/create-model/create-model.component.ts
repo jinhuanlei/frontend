@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-model',
@@ -9,7 +10,7 @@ import {environment} from '../../environments/environment';
 })
 export class CreateModelComponent implements OnInit {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   baseUrl: string = environment.apiUrl;
@@ -62,6 +63,7 @@ export class CreateModelComponent implements OnInit {
     this.http.post(this.baseUrl + 'visual/createModel/', formJson).subscribe(
       data => {
         console.log(data);
+        this.router.navigateByUrl('modellist');
       }
     );
   }

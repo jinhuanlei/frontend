@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 export interface PeriodicElement {
   id: string;
@@ -19,11 +21,18 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./model-list.component.css']
 })
 export class ModelListComponent implements OnInit {
-    displayedColumns: string[] = ['modelId', 'modelName', 'modelPeriod'];
-    myDataArray = ELEMENT_DATA;
-  constructor() {}
+  displayedColumns: string[] = ['modelId', 'modelName', 'modelPeriod'];
+  myDataArray: any;
+  baseUrl: string = environment.apiUrl;
+
+  constructor(private http: HttpClient) {
+  }
 
 
   ngOnInit() {
+    this.http.get(this.baseUrl + 'visual/models/').subscribe(
+      data => {
+        this.myDataArray = data;
+      });
   }
 }
