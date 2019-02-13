@@ -38,7 +38,7 @@
         <!--</tr>-->
         <tr *ngFor="let field of fieldArray; let i = index">
           <td *ngIf="field?.name">
-            <i (click)="deleteFieldValue(i)" class="mdi mdi-close mdi-18px"></i>Layer {{i + 1}} : {{field.name}}</td>
+            <i (click)="deleteFieldValue(i)" class="mdi mdi-close mdi-18px"></i>Layer {{i + 1}} : {{field.val}}</td>
         </tr>
         </tbody>
 
@@ -61,7 +61,7 @@
               <div class="input-group-prepend">
                 <div (click)="deleteFieldValue(i)" class="input-group-text"><i class="mdi mdi-close mdi-18px"></i></div>
               </div>
-              <input [(ngModel)]="field.name" class="form-control" type="text" name="{{field.name}}"
+              <input [(ngModel)]="field.val" class="form-control" type="text" name="{{field.val}}"
                      placeholder="Number of Neural Nets">
             </div>
           </td>

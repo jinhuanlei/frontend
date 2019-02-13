@@ -48,7 +48,7 @@ export class CreateModelComponent implements OnInit {
 
   updateArray() {
     for (let i = 0, flag = true, len = this.fieldArray.length; i < len; flag ? i++ : i) {
-      if (this.fieldArray[i] && this.fieldArray[i].name == null) {
+      if (this.fieldArray[i] && this.fieldArray[i].val == null) {
         this.fieldArray.splice(i, 1);
         flag = false;
       } else {
