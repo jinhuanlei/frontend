@@ -6,15 +6,15 @@
       <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="" [(ngModel)]="modelName">
     </div>
     <!--<div class="form-group col-md-6 offset-md-3">-->
-      <!--<label for="exampleFormControlInput1">Choose the amount of layer</label>-->
-      <!--<select class="form-control" placeholder="Select the Number of Layer" [(ngModel)]="layer_nums"-->
-              <!--(ngModelChange)="onLayerNumsChange($event)">-->
-        <!--<option value="1">1</option>-->
-        <!--<option value="2">2</option>-->
-        <!--<option value="3">3</option>-->
-        <!--<option value="4">4</option>-->
-        <!--<option value="5">5</option>-->
-      <!--</select>-->
+    <!--<label for="exampleFormControlInput1">Choose the amount of layer</label>-->
+    <!--<select class="form-control" placeholder="Select the Number of Layer" [(ngModel)]="layer_nums"-->
+    <!--(ngModelChange)="onLayerNumsChange($event)">-->
+    <!--<option value="1">1</option>-->
+    <!--<option value="2">2</option>-->
+    <!--<option value="3">3</option>-->
+    <!--<option value="4">4</option>-->
+    <!--<option value="5">5</option>-->
+    <!--</select>-->
     <!--</div>-->
     <div class="form-group col-md-6 offset-md-3">
 
@@ -31,14 +31,15 @@
         </thead>
 
         <tbody *ngIf="!isEditItems">
-        <!--<tr *ngIf="firstField">-->
+        <!--<tr *ngIf="fieldArray[0]?.val">-->
         <!--<td>-->
-        <!--<i (click)="firstField = false" class="mdi mdi-close mdi-18px"></i> {{firstFieldName}}-->
+        <!--<i (click)="firstField = false" class="mdi mdi-close mdi-18px"></i> {{fieldArray[0].val}}-->
         <!--</td>-->
         <!--</tr>-->
         <tr *ngFor="let field of fieldArray; let i = index">
-          <td *ngIf="field?.name">
-            <i (click)="deleteFieldValue(i)" class="mdi mdi-close mdi-18px"></i>Layer {{i + 1}} : {{field.val}}</td>
+          <td *ngIf="field?.val">
+            <i (click)="deleteFieldValue(i)" class="mdi mdi-close mdi-18px"></i>Layer {{i + 1}} : {{field.val}}
+          </td>
         </tr>
         </tbody>
 

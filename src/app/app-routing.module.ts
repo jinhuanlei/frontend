@@ -4,7 +4,8 @@ import {BizhawkViewComponent} from './bizhawk-view/bizhawk-view.component';
 import {IndexComponent} from './index/index.component';
 import {ModelListComponent} from './model-list/model-list.component';
 import {CreateModelComponent} from './create-model/create-model.component';
-import {QuickStartComponent} from './quick-start/quick-start.component';
+import {LearningModeComponent} from './learning-mode/learning-mode.component';
+import {ModelItemComponent} from './model-item/model-item.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/index', pathMatch: 'full'},
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'index', component: IndexComponent},
   {path: 'modellist', component: ModelListComponent},
   {path: 'createmodel', component: CreateModelComponent},
-  {path: 'quickstart', component: QuickStartComponent}
+  {path: 'learningmode', component: LearningModeComponent},
+  {path: 'modelitem', component: ModelItemComponent}
 ];
 
 @NgModule({

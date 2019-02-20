@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { QuickStartComponent } from './quick-start.component';
+import { LearningModeComponent } from './learning-mode.component';
 
-describe('QuickStartComponent', () => {
-  let component: QuickStartComponent;
-  let fixture: ComponentFixture<QuickStartComponent>;
+describe('LearningModeComponent', () => {
+  let component: LearningModeComponent;
+  let fixture: ComponentFixture<LearningModeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuickStartComponent ]
+      declarations: [ LearningModeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuickStartComponent);
+    fixture = TestBed.createComponent(LearningModeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

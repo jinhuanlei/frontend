@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {Router} from '@angular/router';
 
 export interface PeriodicElement {
   id: string;
@@ -25,7 +26,7 @@ export class ModelListComponent implements OnInit {
   myDataArray: any;
   baseUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
 
@@ -35,4 +36,11 @@ export class ModelListComponent implements OnInit {
         this.myDataArray = data;
       });
   }
+
+  selectRow(obj) {
+    sessionStorage.setItem('model', JSON.stringify(obj));
+    this.router.navigateByUrl('modelitem');
+    console.log(obj);
+  }
+
 }

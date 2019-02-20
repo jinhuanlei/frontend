@@ -1,8 +1,9 @@
 <br>
 <br>
 <br>
+<div class="container">
 <div class="example-button-row">
-  <button mat-raised-button routerLink="/quickstart" >Create a New Model</button>
+  <button mat-raised-button routerLink="/learningmode" >Create a New Model</button>
 </div>
 <table mat-table [dataSource]='myDataArray'>
   <ng-container matColumnDef="modelId">
@@ -20,5 +21,6 @@
     <td mat-cell *matCellDef="let model"> {{model.model_duration}} </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr class = "example-element-row" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectRow(row)" style="cursor: pointer"></tr>
 </table>
+</div>

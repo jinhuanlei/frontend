@@ -42,8 +42,8 @@ export class CreateModelComponent implements OnInit {
   }
 
   onEditCloseItems() {
-    this.isEditItems = !this.isEditItems;
     this.updateArray();
+    this.isEditItems = !this.isEditItems;
   }
 
   updateArray() {
@@ -54,7 +54,6 @@ export class CreateModelComponent implements OnInit {
       } else {
         flag = true;
       }
-
     }
   }
 
