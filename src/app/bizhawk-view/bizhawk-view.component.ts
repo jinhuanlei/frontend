@@ -54,7 +54,7 @@ export class BizhawkViewComponent implements OnInit {
     );
   }
 
-  testDB(): void {
+  stop(): void {
     this.http.get(this.baseUrl + 'visual/testDB/').subscribe(
       // data => {
       //   this.curTime = data;
