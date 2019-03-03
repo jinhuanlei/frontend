@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-model-item',
@@ -8,10 +11,12 @@ import {Component, OnInit} from '@angular/core';
 export class ModelItemComponent implements OnInit {
   fieldArray: Array<any> = [];
   newAttribute: any = {};
-  isEditItems: boolean;
+  isEditItems = false;
   layer_nums: any;
+  baseUrl: string = environment.apiUrl;
+  model: any = {id: '', model_name: '', model_duration: '', model_created: '', model_path: ''};
 
-  constructor() {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   onLayerNumsChange(value: any) {
@@ -48,6 +53,23 @@ export class ModelItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.model = JSON.parse(sessionStorage.getItem('model'));
+    console.log(this.model);
+    // console.log(this.model['id']);
+    this.http.get(this.baseUrl + 'visual/model/' + this.model.id + '/').subscribe(
+      (data : any[]) => {
+        for(let x = 0; x < data.length; x++){
+          this.fieldArray.push({val : data[x].num_nets});
+        }
+        console.log(this.fieldArray)
+        // for(const obj of data) {
+        //   this.fieldArray.push(obj.num_nets);
+        // }
+      });
   }
 
+}
+
+interface Object {
+  length: any;
 }

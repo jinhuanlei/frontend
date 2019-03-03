@@ -44,6 +44,7 @@ export class CreateModelComponent implements OnInit {
   onEditCloseItems() {
     this.updateArray();
     this.isEditItems = !this.isEditItems;
+    console.log(this.fieldArray)
   }
 
   updateArray() {

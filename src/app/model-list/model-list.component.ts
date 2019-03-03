@@ -9,12 +9,6 @@ export interface PeriodicElement {
   period: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {id: '1', name: 'Hydrogen', period: '1.0079'},
-  {id: '2', name: 'Helium', period: '4.0026'},
-  {id: '3', name: 'Lithium', period: '6.941'},
-
-];
 
 @Component({
   selector: 'app-model-list',
@@ -22,7 +16,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./model-list.component.css']
 })
 export class ModelListComponent implements OnInit {
-  displayedColumns: string[] = ['modelId', 'modelName', 'modelPeriod'];
+  displayedColumns: string[] = ['modelId', 'modelName', 'modelPeriod', 'operation'];
   myDataArray: any;
   baseUrl: string = environment.apiUrl;
 
@@ -40,7 +34,6 @@ export class ModelListComponent implements OnInit {
   selectRow(obj) {
     sessionStorage.setItem('model', JSON.stringify(obj));
     this.router.navigateByUrl('modelitem');
-    console.log(obj);
   }
 
 }
