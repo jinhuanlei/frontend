@@ -68,6 +68,20 @@ export class ModelItemComponent implements OnInit {
       });
   }
 
+  startTraining(){
+    this.http.get(this.baseUrl + 'visual/training/' + this.model.id + '/').subscribe(
+      data => {
+        console.log(data)
+      });
+  }
+
+  stopTraining(){
+    this.http.get(this.baseUrl + 'visual/training/stop/' + this.model.id + '/').subscribe(
+      data => {
+        console.log(data)
+      });
+  }
+
 }
 
 interface Object {
