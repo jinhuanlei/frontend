@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {Subscription} from 'rxjs';
+import {SocketService} from '../socket.service';
 
 @Component({
   selector: 'app-model-item',
@@ -15,41 +17,34 @@ export class ModelItemComponent implements OnInit {
   layer_nums: any;
   baseUrl: string = environment.apiUrl;
   model: any = {id: '', model_name: '', model_duration: '', model_created: '', model_path: ''};
+  wsSubscription: Subscription;
+  status: any;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private wsService: SocketService) {
+    this.wsSubscription = this.wsService.createObservableSocket('ws://localhost:8000/visual/ws/')
+      .subscribe(
+        data => {
+          let obj: MyObj = JSON.parse(data.toString());
+          console.log(obj);
+        },
+        err => console.log('err'),
+        () => {
+          console.log('The observable stream is complete');
+
+        }
+      );
   }
 
-  onLayerNumsChange(value: any) {
-    this.layer_nums = value;
+  validateModel() {
+    const message = {type: 'validateModel', id: this.model.id};
+    this.status = this.wsService.sendMessage(JSON.stringify(message));
+    // console.log(this.status);
   }
 
-
-  addFieldValue() {
-    if (this.fieldArray.length <= 6) {
-      this.fieldArray.push(this.newAttribute);
-      this.newAttribute = {};
-    }
-  }
-
-  deleteFieldValue(index) {
-    this.fieldArray.splice(index, 1);
-  }
-
-  onEditCloseItems() {
-    this.isEditItems = !this.isEditItems;
-    this.updateArray();
-  }
-
-  updateArray() {
-    for (let i = 0, flag = true, len = this.fieldArray.length; i < len; flag ? i++ : i) {
-      if (this.fieldArray[i] && this.fieldArray[i].val == null) {
-        this.fieldArray.splice(i, 1);
-        flag = false;
-      } else {
-        flag = true;
-      }
-
-    }
+  stopValidating() {
+    const message = {type: 'stopValidating', id: this.model.id};
+    this.status = this.wsService.sendMessage(JSON.stringify(message));
+    // console.log(this.status);
   }
 
   ngOnInit() {
@@ -57,33 +52,47 @@ export class ModelItemComponent implements OnInit {
     console.log(this.model);
     // console.log(this.model['id']);
     this.http.get(this.baseUrl + 'visual/model/' + this.model.id + '/').subscribe(
-      (data : any[]) => {
-        for(let x = 0; x < data.length; x++){
-          this.fieldArray.push({val : data[x].num_nets});
+      (data: any[]) => {
+        for (let x = 0; x < data.length; x++) {
+          this.fieldArray.push({val: data[x].num_nets});
         }
-        console.log(this.fieldArray)
+        console.log(this.fieldArray);
         // for(const obj of data) {
         //   this.fieldArray.push(obj.num_nets);
         // }
       });
   }
 
-  startTraining(){
+  startTraining() {
     this.http.get(this.baseUrl + 'visual/training/' + this.model.id + '/').subscribe(
       data => {
-        console.log(data)
+        console.log(data);
       });
   }
 
-  stopTraining(){
+  stopTraining() {
     this.http.get(this.baseUrl + 'visual/training/stop/' + this.model.id + '/').subscribe(
       data => {
-        console.log(data)
+        console.log(data);
+        console.log('Stop to model');
       });
   }
+
 
 }
 
 interface Object {
   length: any;
+}
+
+// export class Message {
+//   constructor(
+//     public message: string,
+//   ) {
+//   }
+// }
+
+interface MyObj {
+  message: string;
+  data: string;
 }

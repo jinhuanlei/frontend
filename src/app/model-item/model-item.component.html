@@ -49,11 +49,17 @@
       </table>
     </div>
     <div class="form-inline col-md-10">
-      <div class="col-md-2 offset-md-1">
+      <div class="col-md-2">
         <button type="button" class="btn btn-primary" (click)="startTraining()">Start Training</button>
       </div>
       <div class="col-md-2 offset-md-1">
         <button type="button" class="btn btn-primary" (click)="stopTraining()">Save & Stop</button>
+      </div>
+      <div class="col-md-2 offset-md-1">
+        <button type="button" class="btn btn-success" (click)="validateModel()">Play the Game</button>
+      </div>
+       <div class="col-md-2 offset-md-1">
+        <button type="button" class="btn btn-danger" (click)="stopValidating()">Stop Playing</button>
       </div>
     </div>
   </div>

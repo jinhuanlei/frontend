@@ -25,7 +25,7 @@
         <!--<caption><i>Add/remove textbox and chip dynamically in Angular 6</i></caption>-->
         <thead>
         <tr>
-          <th>Add Layer
+          <th>Add Layer(Maximum of 6 Layers)
             <a (click)="onEditCloseItems()" class="text-info float-right">
               <i class="mdi mdi-{{isEditItems ? 'close' : 'plus'}} mdi-18px"></i>
             </a>
@@ -72,7 +72,7 @@
         </tr>
         <tr>
           <td align="right">
-            <button *ngIf="fieldArray.length <= 6" class="btn btn-success btn-sm" type="button"
+            <button *ngIf="fieldArray.length < 6" class="btn btn-success btn-sm" type="button"
                     (click)="addFieldValue()"
                     style="margin-right:10px">Add More Item
             </button>

@@ -16,6 +16,7 @@ import { CreateModelComponent } from './create-model/create-model.component';
 import { LearningModeComponent } from './learning-mode/learning-mode.component';
 import { ModelItemComponent } from './model-item/model-item.component';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import {MatDividerModule} from '@angular/material/divider';
     ModelItemComponent,
   ],
   imports: [
+    MatProgressSpinnerModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
