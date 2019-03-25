@@ -40,15 +40,23 @@ export class ModelItemComponent implements OnInit {
   }
 
   validateModel() {
-    const message = {type: 'validateModel', id: this.model.id};
-    this.status = this.wsService.sendMessage(JSON.stringify(message));
-    // console.log(this.status);
+    // const message = {type: 'validateModel', id: this.model.id};
+    // this.status = this.wsService.sendMessage(JSON.stringify(message));
+    // // console.log(this.status);
+    this.http.get(this.baseUrl + 'visual/validating/' + this.model.id + '/').subscribe(
+      data => {
+        console.log(data);
+      });
   }
 
   stopValidating() {
-    const message = {type: 'stopValidating', id: this.model.id};
-    this.status = this.wsService.sendMessage(JSON.stringify(message));
+    // const message = {type: 'stopValidating', id: this.model.id};
+    // this.status = this.wsService.sendMessage(JSON.stringify(message));
     // console.log(this.status);
+    this.http.get(this.baseUrl + 'visual/validating/stop/' + this.model.id + '/').subscribe(
+      data => {
+        console.log(data);
+      });
   }
 
   ngOnInit() {
