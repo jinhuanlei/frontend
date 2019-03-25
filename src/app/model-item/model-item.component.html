@@ -2,17 +2,13 @@
   <div class="row">
     <div class="form-group col-md-8">
       <div class="col-md-2">
-        <button type="button" class="btn btn-light" routerLink="/modellist" >Back</button>
+        <button type="button" class="btn btn-light" routerLink="/modellist">Back</button>
       </div>
       <br>
       <table class="table table-striped table-bordered">
         <thead>
         <tr>
-          <th>My Layer
-            <!--<a (click)="onEditCloseItems()" class="text-info float-right">-->
-            <!--<i class="mdi mdi-{{isEditItems ? 'close' : 'plus'}} mdi-18px"></i>-->
-            <!--</a>-->
-          </th>
+          <th>My Layer</th>
         </tr>
         </thead>
 
@@ -23,29 +19,6 @@
           </td>
         </tr>
         </tbody>
-
-        <!--<tbody *ngIf="isEditItems">-->
-        <!--<tr *ngFor="let field of fieldArray; let i = index">-->
-        <!--<td>-->
-        <!--<div class="input-group">-->
-        <!--<div class="input-group-prepend">-->
-        <!--<div (click)="deleteFieldValue(i)" class="input-group-text"><i class="mdi mdi-close mdi-18px"></i></div>-->
-        <!--</div>-->
-        <!--<input [(ngModel)]="field.val" class="form-control" type="text" name="{{field.val}}"-->
-        <!--placeholder="Number of Neural Nets">-->
-        <!--</div>-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-        <!--<td align="right">-->
-        <!--<button *ngIf="fieldArray.length <= 6" class="btn btn-success btn-sm" type="button"-->
-        <!--(click)="addFieldValue()"-->
-        <!--style="margin-right:10px">Add More Item-->
-        <!--</button>-->
-        <!--<button (click)="onEditCloseItems()" class="btn btn-primary btn-sm" type="button">Save</button>-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
       </table>
     </div>
     <div class="form-inline col-md-10">
@@ -58,8 +31,22 @@
       <div class="col-md-2 offset-md-1">
         <button type="button" class="btn btn-success" (click)="validateModel()">Play the Game</button>
       </div>
-       <div class="col-md-2 offset-md-1">
+      <div class="col-md-2 offset-md-1">
         <button type="button" class="btn btn-danger" (click)="stopValidating()">Stop Playing</button>
+      </div>
+      <div class="col-md-2" style="margin-top: 20px">
+        <mat-card *ngIf="isTraining">
+          <mat-card-content>
+            <h3 class="example-h2">{{traingHint}}</h3>
+            <mat-progress-spinner
+              class="example-margin"
+              [color]="color"
+              [mode]="mode"
+              [value]="value"
+            >
+            </mat-progress-spinner>
+          </mat-card-content>
+        </mat-card>
       </div>
     </div>
   </div>

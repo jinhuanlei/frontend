@@ -19,7 +19,11 @@ export class ModelItemComponent implements OnInit {
   model: any = {id: '', model_name: '', model_duration: '', model_created: '', model_path: ''};
   wsSubscription: Subscription;
   status: any;
-
+  color = 'primary';
+  mode = 'indeterminate';
+  value = 50;
+  traingHint = "Training"
+  isTraining = false;
   constructor(private http: HttpClient, private router: Router, private wsService: SocketService) {
     this.wsSubscription = this.wsService.createObservableSocket('ws://localhost:8000/visual/ws/')
       .subscribe(
@@ -64,9 +68,12 @@ export class ModelItemComponent implements OnInit {
   }
 
   startTraining() {
+    this.traingHint = "Training";
+    this.isTraining = true;
     this.http.get(this.baseUrl + 'visual/training/' + this.model.id + '/').subscribe(
       data => {
         console.log(data);
+        this.isTraining = false;
       });
   }
 
@@ -75,6 +82,7 @@ export class ModelItemComponent implements OnInit {
       data => {
         console.log(data);
         console.log('Stop to model');
+        this.traingHint = "Stoping";
       });
   }
 

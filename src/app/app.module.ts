@@ -7,7 +7,15 @@ import {IndexComponent} from './index/index.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatGridListModule, MatFormFieldModule, MatTableModule, MatSelectModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatGridListModule,
+  MatFormFieldModule,
+  MatTableModule,
+  MatSelectModule,
+  MatCardModule
+} from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {SocketService} from './socket.service';
@@ -31,6 +39,7 @@ import {MatDialogModule} from '@angular/material/dialog';
   ],
   entryComponents: [DialogOverviewExampleDialog],
   imports: [
+    MatCardModule ,
     MatProgressSpinnerModule,
     BrowserModule,
     AppRoutingModule,
