@@ -1,0 +1,7 @@
+<div mat-dialog-content>
+  <p>Comfirm to delete the Model</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Delete</button>
+</div>

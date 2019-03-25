@@ -11,12 +11,13 @@ import {MatButtonModule, MatCheckboxModule, MatGridListModule, MatFormFieldModul
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {SocketService} from './socket.service';
-import { ModelListComponent } from './model-list/model-list.component';
+import {DialogOverviewExampleDialog, ModelListComponent} from './model-list/model-list.component';
 import { CreateModelComponent } from './create-model/create-model.component';
 import { LearningModeComponent } from './learning-mode/learning-mode.component';
 import { ModelItemComponent } from './model-item/model-item.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     CreateModelComponent,
     LearningModeComponent,
     ModelItemComponent,
+    DialogOverviewExampleDialog,
   ],
+  entryComponents: [DialogOverviewExampleDialog],
   imports: [
     MatProgressSpinnerModule,
     BrowserModule,
@@ -42,7 +45,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatSelectModule,
     MatGridListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDialogModule,
   ],
   providers: [HttpClientModule, SocketService],
   bootstrap: [AppComponent]

@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
-import {MatTableDataSource} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource} from '@angular/material';
 
 export interface PeriodicElement {
   id: string;
@@ -17,11 +17,11 @@ export interface PeriodicElement {
   styleUrls: ['./model-list.component.css']
 })
 export class ModelListComponent implements OnInit {
-  displayedColumns: string[] = ['modelId', 'modelName', 'modelPeriod', 'operation'];
+  displayedColumns: string[] = ['modelId', 'modelName', 'modelCreated', 'operation'];
   myDataArray = new MatTableDataSource<Model>();
   baseUrl: string = environment.apiUrl;
   modelData : any;
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router,public dialog: MatDialog) {
   }
 
 
@@ -39,6 +39,22 @@ export class ModelListComponent implements OnInit {
     sessionStorage.setItem('model', JSON.stringify(obj));
     this.router.navigateByUrl('modelitem');
   }
+
+  openDialog(obj): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // console.log();
+      if(result == true){
+        this.deleteModel(obj);
+      }
+      // this.deleteModel(obj);
+    });
+  }
+
 
   deleteModel(obj) {
     console.log(obj);
@@ -60,6 +76,27 @@ export class ModelListComponent implements OnInit {
   }
 
 }
+
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'dialog-overview-example-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+export interface DialogData {
+  id : String;
+}
+
 export interface Model {
   id: string;
   model_name: string;
