@@ -14,21 +14,30 @@ export class CreateModelComponent implements OnInit {
   }
 
   baseUrl: string = environment.apiUrl;
-  layer_nums: any;
+  loss_function: any;
   fieldArray: Array<any> = [];
   newAttribute: any = {};
   modelName: any;
   firstField = true;
   firstFieldName = 'First Item name';
   isEditItems: boolean;
+  sequenceLength = 0;
+  batchSize = 0;
 
   ngOnInit() {
   }
 
   onLayerNumsChange(value: any) {
-    this.layer_nums = value;
+    this.loss_function = value;
   }
 
+   formatLabel(value: number | null) {
+    if (!value) {
+      return 0;
+    }
+
+    return value;
+  }
 
   addFieldValue() {
     if (this.fieldArray.length <= 6) {

@@ -37,7 +37,21 @@
       <div class="col-md-2" style="margin-top: 20px">
         <mat-card *ngIf="isTraining">
           <mat-card-content>
-            <h3 class="example-h2">{{traingHint}}</h3>
+            <h4 class="example-h2">{{traingHint}}</h4>
+            <mat-progress-spinner
+              class="example-margin"
+              [color]="color"
+              [mode]="mode"
+              [value]="value"
+            >
+            </mat-progress-spinner>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-md-2 offset-md-4" style="margin-top: 20px">
+        <mat-card *ngIf="isValidating">
+          <mat-card-content>
+            <h4 class="example-h2">{{validatingHint}}</h4>
             <mat-progress-spinner
               class="example-margin"
               [color]="color"

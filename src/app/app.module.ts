@@ -1,4 +1,4 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {BizhawkViewComponent} from './bizhawk-view/bizhawk-view.component';
@@ -14,7 +14,7 @@ import {
   MatFormFieldModule,
   MatTableModule,
   MatSelectModule,
-  MatCardModule
+  MatCardModule, GestureConfig
 } from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
@@ -26,6 +26,7 @@ import { ModelItemComponent } from './model-item/model-item.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSliderModule} from '@angular/material/slider';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import {MatDialogModule} from '@angular/material/dialog';
   entryComponents: [DialogOverviewExampleDialog],
   imports: [
     MatCardModule ,
+    MatSliderModule,
     MatProgressSpinnerModule,
     BrowserModule,
     AppRoutingModule,
@@ -57,7 +59,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatDividerModule,
     MatDialogModule,
   ],
-  providers: [HttpClientModule, SocketService],
+  providers: [HttpClientModule, SocketService,{ provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

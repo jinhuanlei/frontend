@@ -23,7 +23,9 @@ export class ModelItemComponent implements OnInit {
   mode = 'indeterminate';
   value = 50;
   traingHint = "Training"
+  validatingHint = "Playing"
   isTraining = false;
+  isValidating = false;
   constructor(private http: HttpClient, private router: Router, private wsService: SocketService) {
     this.wsSubscription = this.wsService.createObservableSocket('ws://localhost:8000/visual/ws/')
       .subscribe(
@@ -43,9 +45,11 @@ export class ModelItemComponent implements OnInit {
     // const message = {type: 'validateModel', id: this.model.id};
     // this.status = this.wsService.sendMessage(JSON.stringify(message));
     // // console.log(this.status);
+    this.isValidating = true;
     this.http.get(this.baseUrl + 'visual/validating/' + this.model.id + '/').subscribe(
       data => {
         console.log(data);
+        this.isValidating = false;
       });
   }
 
@@ -53,6 +57,7 @@ export class ModelItemComponent implements OnInit {
     // const message = {type: 'stopValidating', id: this.model.id};
     // this.status = this.wsService.sendMessage(JSON.stringify(message));
     // console.log(this.status);
+    this.validatingHint = "Stopping"
     this.http.get(this.baseUrl + 'visual/validating/stop/' + this.model.id + '/').subscribe(
       data => {
         console.log(data);
@@ -90,7 +95,7 @@ export class ModelItemComponent implements OnInit {
       data => {
         console.log(data);
         console.log('Stop to model');
-        this.traingHint = "Stoping";
+        this.traingHint = "Stopping";
       });
   }
 
