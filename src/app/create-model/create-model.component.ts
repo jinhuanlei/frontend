@@ -14,16 +14,16 @@ export class CreateModelComponent implements OnInit {
   }
 
   baseUrl: string = environment.apiUrl;
-  loss_function: any;
   fieldArray: Array<any> = [];
   newAttribute: any = {};
   modelName: any;
   firstField = true;
   firstFieldName = 'First Item name';
   isEditItems: boolean;
-  sequenceLength = 0;
-  batchSize = 0;
-
+  loss_function = "Mean Squared Error";
+  sequenceLength = 300;
+  batchSize = 20;
+  dropOutRate = 0.5;
   ngOnInit() {
   }
 
@@ -68,7 +68,7 @@ export class CreateModelComponent implements OnInit {
   }
 
   submitForm() {
-    const formJson = {'model_name': this.modelName, 'layers': this.fieldArray};
+    const formJson = {'model_name': this.modelName, 'layers': this.fieldArray, 'lossFunction':this.loss_function,'sequenceLength':this.sequenceLength,'batchSize':this.batchSize,'dropOut':this.dropOutRate};
     this.http.post(this.baseUrl + 'visual/createModel/', formJson).subscribe(
       data => {
         console.log(data);

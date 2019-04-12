@@ -54,7 +54,7 @@
                 <div (click)="deleteFieldValue(i)" class="input-group-text"><i class="mdi mdi-close mdi-18px"></i></div>
               </div>
               <input [(ngModel)]="field.val" class="form-control" type="text" name="{{field.val}}"
-                     placeholder="Number of Neural Nets">
+                     placeholder="Number of Neural Nets(1 - 99)">
             </div>
           </td>
         </tr>
@@ -108,6 +108,10 @@
           [(ngModel)]="batchSize"
           max="99"></mat-slider>
       </div>
+    </div>
+    <div class="form-group col-md-6 offset-md-3">
+      <label for="exampleFormControlInput1">Enter the DropOut Rate (0 - 1)</label>
+      <input type="text" class="form-control" id="formDroupOut" placeholder="" [(ngModel)]="dropOutRate">
     </div>
 
   </div>

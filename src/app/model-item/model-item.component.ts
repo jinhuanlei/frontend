@@ -22,10 +22,15 @@ export class ModelItemComponent implements OnInit {
   color = 'primary';
   mode = 'indeterminate';
   value = 50;
-  traingHint = "Training"
-  validatingHint = "Playing"
+  traingHint = 'Training';
+  validatingHint = 'Playing';
   isTraining = false;
   isValidating = false;
+  loss_function = 'Mean Squared Error';
+  sequenceLength = 300;
+  batchSize = 20;
+  dropOutRate = 0.5;
+
   constructor(private http: HttpClient, private router: Router, private wsService: SocketService) {
     this.wsSubscription = this.wsService.createObservableSocket('ws://localhost:8000/visual/ws/')
       .subscribe(
@@ -39,6 +44,14 @@ export class ModelItemComponent implements OnInit {
 
         }
       );
+  }
+
+  formatLabel(value: number | null) {
+    if (!value) {
+      return 0;
+    }
+
+    return value;
   }
 
   validateModel() {
@@ -57,7 +70,7 @@ export class ModelItemComponent implements OnInit {
     // const message = {type: 'stopValidating', id: this.model.id};
     // this.status = this.wsService.sendMessage(JSON.stringify(message));
     // console.log(this.status);
-    this.validatingHint = "Stopping"
+    this.validatingHint = 'Stopping';
     this.http.get(this.baseUrl + 'visual/validating/stop/' + this.model.id + '/').subscribe(
       data => {
         console.log(data);
@@ -69,19 +82,23 @@ export class ModelItemComponent implements OnInit {
     console.log(this.model);
     // console.log(this.model['id']);
     this.http.get(this.baseUrl + 'visual/model/' + this.model.id + '/').subscribe(
-      (data: any[]) => {
-        for (let x = 0; x < data.length; x++) {
-          this.fieldArray.push({val: data[x].num_nets});
+      (data: any) => {
+        let layers = data.layers;
+        for (let x = 0; x < layers.length; x++) {
+          this.fieldArray.push({val: layers[x].num_nets});
         }
         console.log(this.fieldArray);
-        // for(const obj of data) {
-        //   this.fieldArray.push(obj.num_nets);
-        // }
+        console.log(data.config);
+        let configs : Configs = data.config[0];
+        this.loss_function = configs.loss_function;
+        this.sequenceLength = configs.sequence_length;
+        this.batchSize = configs.batch_size;
+        this.dropOutRate = configs.drop_out;
       });
   }
 
   startTraining() {
-    this.traingHint = "Training";
+    this.traingHint = 'Training';
     this.isTraining = true;
     this.http.get(this.baseUrl + 'visual/training/' + this.model.id + '/').subscribe(
       data => {
@@ -95,7 +112,7 @@ export class ModelItemComponent implements OnInit {
       data => {
         console.log(data);
         console.log('Stop to model');
-        this.traingHint = "Stopping";
+        this.traingHint = 'Stopping';
       });
   }
 
@@ -116,4 +133,17 @@ interface Object {
 interface MyObj {
   message: string;
   data: string;
+}
+
+interface Configs{
+  id: number;
+  num_passes: number;
+  model_id:number;
+  loss_function:string;
+  sequence_length:number;
+  batch_size:number;
+  recur_button:boolean;
+  drop_out:number;
+  max_grad:number;
+  variational_recurrent:boolean;
 }
