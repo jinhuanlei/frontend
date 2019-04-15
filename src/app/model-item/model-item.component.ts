@@ -30,7 +30,7 @@ export class ModelItemComponent implements OnInit {
   sequenceLength = 300;
   batchSize = 20;
   dropOutRate = 0.5;
-
+  public timePromise : any;
   constructor(private http: HttpClient, private router: Router, private wsService: SocketService) {
     this.wsSubscription = this.wsService.createObservableSocket('ws://localhost:8000/visual/ws/')
       .subscribe(
@@ -100,6 +100,7 @@ export class ModelItemComponent implements OnInit {
   startTraining() {
     this.traingHint = 'Training';
     this.isTraining = true;
+    this.timer(1);
     this.http.get(this.baseUrl + 'visual/training/' + this.model.id + '/').subscribe(
       data => {
         console.log(data);
@@ -112,9 +113,34 @@ export class ModelItemComponent implements OnInit {
       data => {
         console.log(data);
         console.log('Stop to model');
+        this.timer(0);
         this.traingHint = 'Stopping';
       });
   }
+
+ second = 0;
+  timer( flag ){      //flag是一个标识，何时计时和何时停止
+
+    if( flag == 1){
+        this.timePromise = setInterval(
+            (success)=>{ //回掉函数开始计时了
+                this.second++ ;
+                //other actions
+            },1000);
+    }
+    else if( flag == 0 ){
+        //other actions
+        //清除计时器
+        window.clearInterval(this.timePromise);
+        console.log("trained_period:" + this.second);
+        const obj = {'training_period_inc':this.second};
+        this.http.post(this.baseUrl + 'visual/trainedModel/'+this.model.id+'/', obj).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+    }
+}
 
 
 }

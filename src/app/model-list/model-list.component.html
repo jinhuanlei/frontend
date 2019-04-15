@@ -16,6 +16,11 @@
     <td mat-cell *matCellDef="let model"> {{model.model_name}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="modelDuration">
+    <th mat-header-cell *matHeaderCellDef> Training Period</th>
+    <td mat-cell *matCellDef="let model"> {{(model.model_duration / 60) | number:0 }} mins </td>
+  </ng-container>
+
   <ng-container matColumnDef="modelCreated">
     <th mat-header-cell *matHeaderCellDef> Model Created</th>
     <td mat-cell *matCellDef="let model"> {{model.model_created}} </td>

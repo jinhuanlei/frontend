@@ -17,7 +17,7 @@ export interface PeriodicElement {
   styleUrls: ['./model-list.component.css']
 })
 export class ModelListComponent implements OnInit {
-  displayedColumns: string[] = ['modelId', 'modelName', 'modelCreated', 'operation'];
+  displayedColumns: string[] = ['modelId', 'modelName','modelDuration', 'modelCreated', 'operation'];
   myDataArray = new MatTableDataSource<Model>();
   baseUrl: string = environment.apiUrl;
   modelData : any;
@@ -100,5 +100,5 @@ export interface DialogData {
 export interface Model {
   id: string;
   model_name: string;
-  model_duration : string;
+  model_duration : number & { __int__: void };
 }
