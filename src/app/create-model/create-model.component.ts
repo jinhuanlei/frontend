@@ -21,8 +21,8 @@ export class CreateModelComponent implements OnInit {
   firstFieldName = 'First Item name';
   isEditItems: boolean;
   loss_function = "Mean Squared Error";
-  sequenceLength = 300;
-  batchSize = 20;
+  sequenceLength = 50;
+  batchSize = 5;
   dropOutRate = 0.5;
   ngOnInit() {
   }

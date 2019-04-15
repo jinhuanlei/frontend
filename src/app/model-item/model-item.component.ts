@@ -27,8 +27,8 @@ export class ModelItemComponent implements OnInit {
   isTraining = false;
   isValidating = false;
   loss_function = 'Mean Squared Error';
-  sequenceLength = 300;
-  batchSize = 20;
+  sequenceLength = 50;
+  batchSize = 5;
   dropOutRate = 0.5;
   public timePromise : any;
   constructor(private http: HttpClient, private router: Router, private wsService: SocketService) {
@@ -105,7 +105,13 @@ export class ModelItemComponent implements OnInit {
       data => {
         console.log(data);
         this.isTraining = false;
-      });
+      },
+      error =>{
+        console.log(error);
+        this.isTraining = false;
+        this.timer(-1);
+      }
+      );
   }
 
   stopTraining() {
@@ -115,6 +121,9 @@ export class ModelItemComponent implements OnInit {
         console.log('Stop to model');
         this.timer(0);
         this.traingHint = 'Stopping';
+      },
+      error =>{
+        console.log(error);
       });
   }
 
@@ -139,6 +148,11 @@ export class ModelItemComponent implements OnInit {
         console.log(data);
       }
     );
+        this.second = 0;
+    }else{
+      window.clearInterval(this.timePromise);
+      console.log("trained_period:" + this.second);
+      this.second = 0;
     }
 }
 
