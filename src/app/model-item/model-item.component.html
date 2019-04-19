@@ -27,15 +27,15 @@
       </table>
     </div>
     <div class="form-group col-md-6 offset-md-3">
-      <label for="exampleFormControlInput1">Choose the Loss Function</label>
+      <label>Choose the Loss Function</label>
       <select class="form-control" placeholder="Choose the Loss Function" [(ngModel)]="loss_function"
-              (ngModelChange)="onLayerNumsChange($event)">
+              >
         <option value="Mean Squared Error">Mean Squared Error</option>
         <option value="Cross Entropy">Cross Entropy</option>
       </select>
     </div>
     <div class="form-group col-md-6 offset-md-3">
-      <label for="exampleFormControlInput1">Enter the Sequence Length(1 - 999)</label>
+      <label>Enter the Sequence Length(1 - 300)</label>
       <div layout="row" flex class="form-inline">
         <input type="text" class="form-control col-md-2" [(ngModel)]="sequenceLength">
         <mat-slider
@@ -45,11 +45,11 @@
           tickInterval="1000"
           min="1"
           [(ngModel)]="sequenceLength"
-          max="999"></mat-slider>
+          max="300"></mat-slider>
       </div>
     </div>
     <div class="form-group col-md-6 offset-md-3">
-      <label for="exampleFormControlInput1">Enter the Batch Size(1 - 99)</label>
+      <label>Enter the Batch Size(1 - 99)</label>
       <!--<input type="email" class="form-control" id="exampleFormControlInput3" placeholder="" [(ngModel)]="batchSize">-->
       <!--<div class="col-md-6">-->
       <div layout="row" flex class="form-inline">
@@ -65,7 +65,7 @@
       </div>
     </div>
     <div class="form-group col-md-6 offset-md-3">
-      <label for="exampleFormControlInput1">Enter the DropOut Rate (0 - 1)</label>
+      <label>Enter the DropOut Rate (0 - 1)</label>
       <input type="text" class="form-control" id="formDroupOut" placeholder="" [(ngModel)]="dropOutRate">
     </div>
     <div class="form-inline col-md-10 offset-md-2">
