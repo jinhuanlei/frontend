@@ -27,6 +27,17 @@
       </table>
     </div>
     <div class="form-group col-md-6 offset-md-3">
+      <label>Choose the Training Set</label>
+      <select class="form-control" placeholder="Choose the Training Set" [(ngModel)]="trainging_set"
+              (ngModelChange)="onTrainingSetChange($event)">
+        <option value="Default">Default</option>
+        <option value="Small1">Small 1</option>
+        <option value="Small2">Small 2</option>
+        <option value="Medium">Medium</option>
+        <option value="Large">Large</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6 offset-md-3">
       <label>Choose the Loss Function</label>
       <select class="form-control" placeholder="Choose the Loss Function" [(ngModel)]="loss_function"
               >

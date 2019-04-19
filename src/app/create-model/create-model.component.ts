@@ -20,18 +20,26 @@ export class CreateModelComponent implements OnInit {
   firstField = true;
   firstFieldName = 'First Item name';
   isEditItems: boolean;
-  loss_function = "Mean Squared Error";
+  loss_function = 'Mean Squared Error';
   sequenceLength = 50;
   batchSize = 5;
   dropOutRate = 0.5;
+  trainging_set = 'Default';
+
   ngOnInit() {
   }
 
-  onLayerNumsChange(value: any) {
+
+  onTrainingSetChange(value: any) {
+    this.trainging_set = value;
+
+  }
+
+  onLossFunctionChange(value: any) {
     this.loss_function = value;
   }
 
-   formatLabel(value: number | null) {
+  formatLabel(value: number | null) {
     if (!value) {
       return 0;
     }
@@ -53,7 +61,7 @@ export class CreateModelComponent implements OnInit {
   onEditCloseItems() {
     this.updateArray();
     this.isEditItems = !this.isEditItems;
-    console.log(this.fieldArray)
+    console.log(this.fieldArray);
   }
 
   updateArray() {
@@ -68,7 +76,15 @@ export class CreateModelComponent implements OnInit {
   }
 
   submitForm() {
-    const formJson = {'model_name': this.modelName, 'layers': this.fieldArray, 'lossFunction':this.loss_function,'sequenceLength':this.sequenceLength,'batchSize':this.batchSize,'dropOut':this.dropOutRate};
+    const formJson = {
+      'model_name': this.modelName,
+      'layers': this.fieldArray,
+      'lossFunction': this.loss_function,
+      'sequenceLength': this.sequenceLength,
+      'batchSize': this.batchSize,
+      'dropOut': this.dropOutRate,
+      'trainingSet':this.trainging_set
+    };
     this.http.post(this.baseUrl + 'visual/createModel/', formJson).subscribe(
       data => {
         console.log(data);

@@ -5,6 +5,8 @@ import {environment} from '../../environments/environment';
 import {Subscription} from 'rxjs';
 import {SocketService} from '../socket.service';
 
+
+
 @Component({
   selector: 'app-model-item',
   templateUrl: './model-item.component.html',
@@ -30,6 +32,7 @@ export class ModelItemComponent implements OnInit {
   sequenceLength = 50;
   batchSize = 5;
   dropOutRate = 0.5;
+  trainging_set = 'Default';
   public timePromise : any;
   constructor(private http: HttpClient, private router: Router, private wsService: SocketService) {
     this.wsSubscription = this.wsService.createObservableSocket('ws://localhost:8000/visual/ws/')
@@ -87,8 +90,9 @@ export class ModelItemComponent implements OnInit {
         for (let x = 0; x < layers.length; x++) {
           this.fieldArray.push({val: layers[x].num_nets});
         }
-        console.log(this.fieldArray);
-        console.log(data.config);
+        this.trainging_set = data.training_set;
+        // console.log(this.fieldArray);
+        console.log(data.model);
         let configs : Configs = data.config[0];
         this.loss_function = configs.loss_function;
         this.sequenceLength = configs.sequence_length;
@@ -186,4 +190,7 @@ interface Configs{
   drop_out:number;
   max_grad:number;
   variational_recurrent:boolean;
+}
+interface ModelObj {
+  training_set : string;
 }
