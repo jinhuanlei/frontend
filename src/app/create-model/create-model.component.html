@@ -10,10 +10,10 @@
     </div>
     <div class="form-group col-md-6 offset-md-3">
       <table class="table table-striped table-bordered">
-        <!--<caption><i>Add/remove textbox and chip dynamically in Angular 6</i></caption>-->
         <thead>
         <tr>
-          <th>Add Layer(Maximum of 6 Layers)
+          <th>Add Layer(Maximum of 6 Layers) <i class="iconfont icon-icon-circle-question" style="font-size: 16px; margin-left: 10px" placement="right"
+        ngbPopover="The higher layer higher meanings higher learning efficiency, meanwhile it is easy to overfitting " popoverTitle="Set Layers For Neural Network"> </i>
             <a (click)="onEditCloseItems()" class="text-info float-right">
               <i class="mdi mdi-{{isEditItems ? 'close' : 'plus'}} mdi-18px"></i>
             </a>
@@ -22,11 +22,6 @@
         </thead>
 
         <tbody *ngIf="!isEditItems">
-        <!--<tr *ngIf="fieldArray[0]?.val">-->
-        <!--<td>-->
-        <!--<i (click)="firstField = false" class="mdi mdi-close mdi-18px"></i> {{fieldArray[0].val}}-->
-        <!--</td>-->
-        <!--</tr>-->
         <tr *ngFor="let field of fieldArray; let i = index">
           <td *ngIf="field?.val">
             <i (click)="deleteFieldValue(i)" class="mdi mdi-close mdi-18px"></i>Layer {{i + 1}} : {{field.val}}
@@ -35,18 +30,6 @@
         </tbody>
 
         <tbody *ngIf="isEditItems">
-        <!--<tr>-->
-        <!--<td *ngIf="firstField">-->
-        <!--<div class="input-group">-->
-        <!--<div class="input-group-prepend">-->
-        <!--<div (click)="firstField = false" class="input-group-text"><i class="mdi mdi-close mdi-18px"></i></div>-->
-        <!--</div>-->
-        <!--<input [(ngModel)]="firstFieldName" class="form-control py-2 " type="text" name="firstFieldName"-->
-        <!--placeholder="Item Name">-->
-        <!--</div>-->
-        <!--</td>-->
-        <!--</tr>-->
-
         <tr *ngFor="let field of fieldArray; let i = index">
           <td>
             <div class="input-group">
@@ -54,7 +37,7 @@
                 <div (click)="deleteFieldValue(i)" class="input-group-text"><i class="mdi mdi-close mdi-18px"></i></div>
               </div>
               <input [(ngModel)]="field.val" class="form-control" type="text" name="{{field.val}}"
-                     placeholder="Number of Neural Nets(1 - 99)">
+                     placeholder="Number of Neural Nets(1 - 300)">
             </div>
           </td>
         </tr>
@@ -71,7 +54,8 @@
       </table>
     </div>
     <div class="form-group col-md-6 offset-md-3">
-      <label>Choose the Training Set</label>
+      <label>Choose the Training Set</label> <i class="iconfont icon-icon-circle-question" style="font-size: 16px; margin-left: 10px" placement="right"
+        ngbPopover="The larger the training set selected, the machine learning training period will be longer, but the training effect is better." popoverTitle="Choose the Training Set"> </i>
       <select class="form-control" placeholder="Choose the Training Set" [(ngModel)]="trainging_set"
               (ngModelChange)="onTrainingSetChange($event)">
         <option value="Default">Default</option>
@@ -79,18 +63,21 @@
         <option value="Small2">Small 2</option>
         <option value="Medium">Medium</option>
         <option value="Large">Large</option>
+        <option value="Test">Test</option>
       </select>
     </div>
     <div class="form-group col-md-6 offset-md-3">
-      <label for="exampleFormControlInput1">Choose the Loss Function</label>
-      <select class="form-control" placeholder="Choose the Loss Function" [(ngModel)]="loss_function"
+      <label for="exampleFormControlInput1">Choose the Loss Function</label> <i class="iconfont icon-icon-circle-question" style="font-size: 16px; margin-left: 10px" placement="right"
+        ngbPopover="Either “mean squared error” or “cross entropy”." popoverTitle="Loss Functions"> </i>
+      <select class="form-control" placeh2older="Choose the Loss Function" [(ngModel)]="loss_function"
               (ngModelChange)="onLossFunctionChange($event)">
         <option value="Mean Squared Error">Mean Squared Error</option>
         <option value="Cross Entropy">Cross Entropy</option>
       </select>
     </div>
     <div class="form-group col-md-6 offset-md-3">
-      <label for="exampleFormControlInput1">Enter the Sequence Length(1 - 300)</label>
+      <label for="exampleFormControlInput1">Enter the Sequence Length(1 - 300)</label> <i class="iconfont icon-icon-circle-question" style="font-size: 16px; margin-left: 10px" placement="right"
+        ngbPopover="Number of time steps to train at once for backpropagation through time." popoverTitle="Sequence Length"> </i>
       <div layout="row" flex class="form-inline">
         <input type="text" class="form-control col-md-2" [(ngModel)]="sequenceLength">
         <mat-slider
@@ -105,7 +92,8 @@
     </div>
 
     <div class="form-group col-md-6 offset-md-3">
-      <label for="exampleFormControlInput1">Enter the Batch Size(1 - 99)</label>
+      <label for="exampleFormControlInput1">Enter the Batch Size(1 - 99)</label> <i class="iconfont icon-icon-circle-question" style="font-size: 16px; margin-left: 10px" placement="right"
+        ngbPopover="Number of sequences to process per batch." popoverTitle="Batch Size"> </i>
       <!--<input type="email" class="form-control" id="exampleFormControlInput3" placeholder="" [(ngModel)]="batchSize">-->
       <!--<div class="col-md-6">-->
       <div layout="row" flex class="form-inline">
@@ -121,7 +109,8 @@
       </div>
     </div>
     <div class="form-group col-md-6 offset-md-3">
-      <label for="exampleFormControlInput1">Enter the DropOut Rate (0 - 1)</label>
+      <label for="exampleFormControlInput1">Enter the DropOut Rate (0 - 1)</label> <i class="iconfont icon-icon-circle-question" style="font-size: 16px; margin-left: 10px" placement="right"
+        ngbPopover="Recommended value is 0.3 - 0.5, which is valid solution to solve overfitting problems" popoverTitle="Choose the Drop Out Rate"> </i>
       <input type="text" class="form-control" id="formDroupOut" placeholder="" [(ngModel)]="dropOutRate">
     </div>
 
